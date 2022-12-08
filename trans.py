@@ -1,4 +1,5 @@
-
+#!/usr/bin/python 
+# -*- coding: <encoding name> -*-
 from os import system
 from os import unlink
 import os
