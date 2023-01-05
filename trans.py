@@ -46,6 +46,7 @@ from docx.enum.style import WD_STYLE_TYPE
 from docx.shared import Pt, RGBColor, Inches
 from docx.oxml.ns import qn
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+import PyPDF2
 
 try:
     from selenium import webdriver
@@ -873,8 +874,20 @@ def an(msg):
                             else:
                                 h.append(ch)
                                 bot.send_message(ch, 'حسنا, سيتم التحميل الرجاء انتظار دقيقة واحدة 💚')
+                                
                                 with open('ahmed.pdf', 'wb') as new_file:
                                     new_file.write(downloaded_file)
+                                with open('ahmed.pdf', 'rb') as f:
+                                    # Create a PDF object
+                                    pdf = PyPDF2.PdfFileReader(f)
+                                    # Get the number of pages in the PDF
+                                    num_pages = pdf.getNumPages()
+                                    # Initialize a list to store the translated text
+                                    translated_text = []
+                                    # Iterate over each page in the PDF
+                                    for page_num in range(num_pages):
+                                        # Extract the text from the page
+                                        page_text = pdf.getPage(page_num).extractText()
 
                                 with fitz.open("ahmed.pdf") as doc:
                                     text = ""
@@ -1058,27 +1071,24 @@ def an(msg):
                                 bot.send_message(ch, 'حسنا, سيتم التحميل الرجاء انتظار دقيقة واحدة 💚')
                                 with open('ahmed.pdf', 'wb') as new_file:
                                     new_file.write(downloaded_file)
-                                doc = fitz.open(f'ahmed.pdf')
                                 v = 0
-                                document = Document()
-
-                                with fitz.open("ahmed.pdf") as doc:
-                                    text = ""
-                                    open(f'{user}.txt', 'a').write(
-                                        'Done translation by bot Ahmed \n@any_kokybot\n@Q5QQQQ\n')
-                                    open(f'{user}.txt', 'a').write('-----------------------\n')
-                                    v = 0
-                                    open(f'ahmed2.txt', 'w', encoding='utf-8').write(f"")
-
-                                    for page in doc:
-                                        strr = ''
-                                        text = page.get_text()
-                                        text += f'----------------{str(page)[:7]}-------------------\n'
-                                        text += '|#|'
-
-                                        if len(text) > 5000:
+                                document = Document()    
+                                with open('ahmed.pdf', 'rb') as f:
+                                    # Create a PDF object
+                                    pdf = PyPDF2.PdfFileReader(f)
+                                    # Get the number of pages in the PDF
+                                    num_pages = pdf.getNumPages()
+                                    # Initialize a list to store the translated text
+                                    translated_text = []
+                                    # Iterate over each page in the PDF
+                                    txt= ''
+                                    for page_num in range(num_pages):
+                                        # Extract the text from the page
+                                        page_text = pdf.getPage(page_num).extractText()
+                                        page_text += '-----------------------'
+                                        if len(page_text) > 5000:
                                             trans = ''
-                                            i = len(text)//5000
+                                            i = len(page_text)//5000
 
                                             ii = 0
                                             iii = 0
@@ -1094,19 +1104,10 @@ def an(msg):
                                         else:
 
                                             trans = GoogleTranslator(source='en', target='ar').translate(
-                                                text=text)
-                                        try:
-
-                                            pix = doc.loadPage(v).getPixmap()  # number of page
-
-                                            output = f"{ch}.png"
-                                            pix.writePNG(output)
-                                            document.add_picture(f'{ch}.png')
-                                        except:
-                                            pass
-
-                                        # bot.send_photo(ch, open(f'{ch}.png', 'rb'))
-                                        v += 1
+                                                text=page_text)
+                                        
+                                        
+                                
                                         document.add_paragraph(f'{trans}')
 
                                         open(f'{user}.txt', 'a', encoding='utf-8').write(text)
