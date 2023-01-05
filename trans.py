@@ -3,6 +3,7 @@
 from os import system
 from os import unlink
 import os
+
 try:
     import fitz
 except:
@@ -19,7 +20,7 @@ try:
     import pytesseract
 except:
     system('pip install pytesseract')
-#1788351105:AAHfYx9EsreTguPB1PUkDzHZ1ZhZz5m-nuc
+# 1788351105:AAHfYx9EsreTguPB1PUkDzHZ1ZhZz5m-nuc
 try:
     import PIL
 except:
@@ -53,6 +54,7 @@ try:
 except:
     system('pip install selenium')
 import fitz
+
 try:
     import telebot
 except:
@@ -63,13 +65,13 @@ from telebot import types
 import requests
 from PIL import Image
 import io
-#import pytesseract
-from wand.image import Image as wi
+# import pytesseract
+# from wand.image import Image as wi
 from pptx import Presentation
 from docx import Document
 import glob
 
-#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 print('tran')
 r1 = requests.session()
@@ -874,7 +876,7 @@ def an(msg):
                             else:
                                 h.append(ch)
                                 bot.send_message(ch, 'حسنا, سيتم التحميل الرجاء انتظار دقيقة واحدة 💚')
-                                
+
                                 with open('ahmed.pdf', 'wb') as new_file:
                                     new_file.write(downloaded_file)
                                 with open('ahmed.pdf', 'rb') as f:
@@ -1072,65 +1074,68 @@ def an(msg):
                                 with open('ahmed.pdf', 'wb') as new_file:
                                     new_file.write(downloaded_file)
                                 v = 0
-                                document = Document()    
+                                document = Document()
+                                print('ok')
                                 with open('ahmed.pdf', 'rb') as f:
-                                    # Create a PDF object
-                                    pdf = PyPDF2.PdfFileReader(f)
-                                    # Get the number of pages in the PDF
-                                    num_pages = pdf.getNumPages()
-                                    # Initialize a list to store the translated text
-                                    translated_text = []
-                                    # Iterate over each page in the PDF
-                                    txt= ''
-                                    for page_num in range(num_pages):
-                                        # Extract the text from the page
-                                        page_text = pdf.getPage(page_num).extractText()
-                                        page_text += '-----------------------'
-                                        if len(page_text) > 5000:
-                                            trans = ''
-                                            i = len(page_text)//5000
+                                    from PyPDF2 import PdfReader
 
-                                            ii = 0
-                                            iii = 0
-                                            while ii < i + 1:
+                                    reader = PdfReader(f)
+                                    number_of_pages = len(reader.pages)
 
-                                                tran = GoogleTranslator(source='en', target='ar').translate(
-                                                    text=text[iii:4999 + iii])
+                                    txt = ''
+                                    print('ok')
+                                    try:
+                                        for page_num in range(number_of_pages):
+                                            strr = ''
+                                            # Extract the text from the page
+                                            page = reader.pages[page_num]
+                                            text = page.extract_text()
+                                            text += '-----------------------'
+                                            print(text)
+                                            if len(text) > 5000:
+                                                trans = ''
+                                                i = len(text) // 5000
 
+                                                ii = 0
+                                                iii = 0
+                                                while ii < i + 1:
+                                                    tran = GoogleTranslator(source='en', target='ar').translate(
+                                                        text=text[iii:4999 + iii])
 
-                                                ii += 1
-                                                iii += 5000
-                                            trans += tran
-                                        else:
+                                                    ii += 1
+                                                    iii += 5000
+                                                trans += tran
+                                            else:
 
-                                            trans = GoogleTranslator(source='en', target='ar').translate(
-                                                text=page_text)
-                                        
-                                        
-                                
-                                        document.add_paragraph(f'{trans}')
+                                                trans = GoogleTranslator(source='en', target='ar').translate(
+                                                    text=text)
 
-                                        open(f'{user}.txt', 'a', encoding='utf-8').write(text)
-                                        open(f'{user}ar.txt', 'a', encoding='utf-8').write(trans)
-                                        zx = 0
-                                        zx1 = text.split('\n')
-                                        zx2 = trans.split('\n')
-                                        while len(text.split('\n')) > zx:
-                                            try:
-                                                strr += f"{zx1[zx]}\n{zx2[zx]} \n"
-                                            except:
-                                                pass
-                                            zx += 1
+                                            document.add_paragraph(f'{trans}')
 
-                                        open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
-                                        print(strr)
+                                            open(f'{user}.txt', 'a', encoding='utf-8').write(text)
+                                            open(f'{user}ar.txt', 'a', encoding='utf-8').write(trans)
+                                            zx = 0
+                                            zx1 = text.split('\n')
+                                            zx2 = trans.split('\n')
+                                            while len(text.split('\n')) > zx:
+                                                try:
+                                                    strr += f"{zx1[zx]}\n{zx2[zx]} \n"
+                                                except:
+                                                    pass
+                                                zx += 1
+
+                                            open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
+                                            print(strr)
+                                    except:
+                                        pass
                                     try:
                                         os.remove(f"{ch}.png")
 
                                     except:
                                         pass
                                     document.save('Ahmed2.docx')
-                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'), caption=f'{msg.document.file_name}\nترجمة من دون تغير الملف ')
+                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
+                                                      caption=f'{msg.document.file_name}\nترجمة من دون تغير الملف ')
                                     x1 = open(f'{user}ar.txt', 'r', encoding='utf-8').read()
                                     z = open(f'{user}.txt', 'r', encoding='utf-8').read()
                                     open('ahmed.txt', 'w', encoding='utf-8').write(x1)
@@ -1203,14 +1208,13 @@ def an(msg):
                                         aa = u.split('---------')
 
                                         trans = GoogleTranslator(source='en', target='ar').translate(
-                                                        text=str(aa[i]))
+                                            text=str(aa[i]))
 
                                         i += 1
 
-
                                         open(f'{user}.txt', 'a', encoding='utf-8').write(f'{u}\n----------------\n')
-                                        open(f'{user}ar.txt', 'a', encoding='utf-8').write(f'{trans}\n----------------\n')
-
+                                        open(f'{user}ar.txt', 'a', encoding='utf-8').write(
+                                            f'{trans}\n----------------\n')
 
                             elif x == 'docx' or x == 'DOCx':
                                 u = ''
@@ -1235,7 +1239,6 @@ def an(msg):
 
                             else:
                                 bot.send_message(ch, 'عذرا لم يتم ترجمة ملفك لانه ليس✳️ \npdf or pptx or docx\n')
-
 
                             url = 'https://www.arabtran.com/gtranslate/'
                             head = {
