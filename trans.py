@@ -53,7 +53,7 @@ try:
     from selenium import webdriver
 except:
     system('pip install selenium')
-import fitz
+#import fitz
 
 try:
     import telebot
@@ -75,8 +75,8 @@ import glob
 
 print('tran')
 r1 = requests.session()
-token = '1601467114:AAEQhSKTf8pSbSBFcSkG-KzDPlYZONee0X8'
-bot = telebot.TeleBot("1601467114:AAEQhSKTf8pSbSBFcSkG-KzDPlYZONee0X8")
+token = '1215240244:AAEPIpxylfNdqjgQ7vPnOh-JVshFF_FE4KU'
+bot = telebot.TeleBot("1215240244:AAEPIpxylfNdqjgQ7vPnOh-JVshFF_FE4KU")
 open('tran.txt', 'a').write('')
 c = []
 g = []
@@ -1092,7 +1092,7 @@ def an(msg):
                                             page = reader.pages[page_num]
                                             text = page.extract_text()
                                             text += '-----------------------'
-                                            print(text)
+                                            
                                             if len(text) > 5000:
                                                 trans = ''
                                                 i = len(text) // 5000
@@ -1126,7 +1126,7 @@ def an(msg):
                                                 zx += 1
 
                                             open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
-                                            print(strr)
+                                            
                                     except:
                                         pass
                                     try:
