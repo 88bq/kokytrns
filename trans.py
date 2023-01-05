@@ -1084,6 +1084,7 @@ def an(msg):
 
                                     txt = ''
                                     print('ok')
+                                    open(f'ahmed2.txt', 'w', encoding='utf-8').write('')
                                     try:
                                         for page_num in range(number_of_pages):
                                             strr = ''
