@@ -1,4 +1,4 @@
-#!/usr/bin/python 
+#!/usr/bin/python
 # -*- coding: <encoding name> -*-
 from os import system
 from os import unlink
@@ -53,7 +53,7 @@ try:
     from selenium import webdriver
 except:
     system('pip install selenium')
-#import fitz
+# import fitz
 
 try:
     import telebot
@@ -1092,7 +1092,7 @@ def an(msg):
                                             page = reader.pages[page_num]
                                             text = page.extract_text()
                                             text += '-----------------------'
-                                            
+
                                             if len(text) > 5000:
                                                 trans = ''
                                                 i = len(text) // 5000
@@ -1111,8 +1111,6 @@ def an(msg):
                                                 trans = GoogleTranslator(source='en', target='ar').translate(
                                                     text=text)
 
-                                            document.add_paragraph(f'{trans}')
-
                                             open(f'{user}.txt', 'a', encoding='utf-8').write(text)
                                             open(f'{user}ar.txt', 'a', encoding='utf-8').write(trans)
                                             zx = 0
@@ -1120,13 +1118,26 @@ def an(msg):
                                             zx2 = trans.split('\n')
                                             while len(text.split('\n')) > zx:
                                                 try:
-                                                    strr += f"{zx1[zx]}\n{zx2[zx]} \n"
+                                                    # Add a paragraph with red text and right alignment
+                                                    right_paragraph = document.add_paragraph()
+                                                    right_text = right_paragraph.add_run(
+                                                        f'{zx1[zx]}')
+                                                    right_text.font.color.rgb = RGBColor(0, 0, 0)
+                                                    right_paragraph.alignment = 0
+
+                                                    # Add a paragraph with blue text and left alignment
+                                                    left_paragraph = document.add_paragraph()
+                                                    left_text = left_paragraph.add_run(
+                                                        f'{zx2[zx]}')
+                                                    left_text.font.color.rgb = RGBColor(210, 0, 210)
+                                                    left_paragraph.alignment = 2
+                                                    #strr += f"{}\n{} \n"
                                                 except:
                                                     pass
                                                 zx += 1
 
                                             open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
-                                            
+
                                     except:
                                         pass
                                     try:
@@ -1136,7 +1147,8 @@ def an(msg):
                                         pass
                                     document.save('Ahmed2.docx')
                                     bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
-                                                      caption=f'{msg.document.file_name}\nترجمة من دون تغير الملف ')
+                                                      caption=f'{msg.document.file_name}\nترجمة سطرية')
+
                                     x1 = open(f'{user}ar.txt', 'r', encoding='utf-8').read()
                                     z = open(f'{user}.txt', 'r', encoding='utf-8').read()
                                     open('ahmed.txt', 'w', encoding='utf-8').write(x1)
@@ -1173,8 +1185,8 @@ def an(msg):
                                     font.size = Pt(16)
                                     font.bold = True
                                     font.color.rgb = RGBColor(0, 0, 0)
-                                    document.save('Ahmed1.docx')
-                                    bot.send_document(ch, open(f'Ahmed1.docx', 'rb'),
+                                    document.save('Ahmed2.docx')
+                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
                                                       caption=f'{msg.document.file_name}\nترجمة سطرية')
 
                         else:
