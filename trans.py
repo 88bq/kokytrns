@@ -70,7 +70,7 @@ import io
 from pptx import Presentation
 from docx import Document
 import glob
-
+import subprocess
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 print('tran')
@@ -83,6 +83,10 @@ g = []
 d = []
 work = []
 idi = 209501902
+
+
+def pptx_to_pdf(input_path, output_path):
+    subprocess.run(["unoconv", "-f", "pdf", "-o", output_path, input_path])
 
 
 @bot.message_handler(commands=['start'])
@@ -1063,7 +1067,19 @@ def an(msg):
                         file_info = bot.get_file(msg.document.file_id)
                         downloaded_file = bot.download_file(file_info.file_path)
                         x = msg.document.file_name[-4:]
-                        if x == '.pdf' or x == '.PDF':
+                        if x == 'pptx' or x == 'PPTx':
+                            with open('ahmed.pptx', 'wb') as new_file:
+                                new_file.write(downloaded_file)
+                            pptx_to_pdf(output_path='ahmed.pdf', input_path='ahmed.pptx')
+                        elif x == 'docx' or x == 'DOCx':
+                            with open('ahmed.docx', 'wb') as new_file:
+                                new_file.write(downloaded_file)
+                            pptx_to_pdf(output_path='ahmed.pdf', input_path='ahmed.docx')
+                        else:
+                            with open('ahmed.pdf', 'wb') as new_file:
+                                new_file.write(downloaded_file)
+                            
+                        if 1 == 1:
 
                             if ch in h:
 
@@ -1071,8 +1087,7 @@ def an(msg):
                             else:
                                 h.append(ch)
                                 bot.send_message(ch, 'حسنا, سيتم التحميل الرجاء انتظار دقيقة واحدة 💚')
-                                with open('ahmed.pdf', 'wb') as new_file:
-                                    new_file.write(downloaded_file)
+                                
                                 v = 0
                                 document = Document()
                                 print('ok')
@@ -1087,57 +1102,61 @@ def an(msg):
                                     open(f'ahmed2.txt', 'w', encoding='utf-8').write('')
                                     try:
                                         for page_num in range(number_of_pages):
-                                            strr = ''
-                                            # Extract the text from the page
-                                            page = reader.pages[page_num]
-                                            text = page.extract_text()
-                                            text += '-----------------------'
+                                            try:
 
-                                            if len(text) > 5000:
-                                                trans = ''
-                                                i = len(text) // 5000
+                                                strr = ''
+                                                # Extract the text from the page
 
-                                                ii = 0
-                                                iii = 0
-                                                while ii < i + 1:
-                                                    tran = GoogleTranslator(source='en', target='ar').translate(
-                                                        text=text[iii:4999 + iii])
+                                                page = reader.pages[page_num]
+                                                text = page.extract_text()
+                                                text += '-----------------------'
 
-                                                    ii += 1
-                                                    iii += 5000
-                                                trans += tran
-                                            else:
+                                                if len(text) > 5000:
+                                                    trans = ''
+                                                    i = len(text) // 5000
 
-                                                trans = GoogleTranslator(source='en', target='ar').translate(
-                                                    text=text)
+                                                    ii = 0
+                                                    iii = 0
+                                                    while ii < i + 1:
+                                                        tran = GoogleTranslator(source='en', target='ar').translate(
+                                                            text=text[iii:4999 + iii])
 
-                                            open(f'{user}.txt', 'a', encoding='utf-8').write(text)
-                                            open(f'{user}ar.txt', 'a', encoding='utf-8').write(trans)
-                                            zx = 0
-                                            zx1 = text.split('\n')
-                                            zx2 = trans.split('\n')
-                                            while len(text.split('\n')) > zx:
-                                                try:
-                                                    # Add a paragraph with red text and right alignment
-                                                    right_paragraph = document.add_paragraph()
-                                                    right_text = right_paragraph.add_run(
-                                                        f'{zx1[zx]}')
-                                                    right_text.font.color.rgb = RGBColor(0, 0, 0)
-                                                    right_paragraph.alignment = 0
+                                                        ii += 1
+                                                        iii += 5000
+                                                    trans += tran
+                                                else:
 
-                                                    # Add a paragraph with blue text and left alignment
-                                                    left_paragraph = document.add_paragraph()
-                                                    left_text = left_paragraph.add_run(
-                                                        f'{zx2[zx]}')
-                                                    left_text.font.color.rgb = RGBColor(210, 0, 210)
-                                                    left_paragraph.alignment = 2
-                                                    #strr += f"{}\n{} \n"
-                                                except:
-                                                    pass
-                                                zx += 1
+                                                    trans = GoogleTranslator(source='en', target='ar').translate(
+                                                        text=text)
 
-                                            open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
+                                                open(f'{user}.txt', 'a', encoding='utf-8').write(text)
+                                                open(f'{user}ar.txt', 'a', encoding='utf-8').write(trans)
+                                                zx = 0
+                                                zx1 = text.split('\n')
+                                                zx2 = trans.split('\n')
+                                                while len(text.split('\n')) > zx:
+                                                    try:
+                                                        # Add a paragraph with red text and right alignment
+                                                        right_paragraph = document.add_paragraph()
+                                                        right_text = right_paragraph.add_run(
+                                                            f'{zx1[zx]}')
+                                                        right_text.font.color.rgb = RGBColor(0, 0, 0)
+                                                        right_paragraph.alignment = 0
 
+                                                        # Add a paragraph with blue text and left alignment
+                                                        left_paragraph = document.add_paragraph()
+                                                        left_text = left_paragraph.add_run(
+                                                            f'{zx2[zx]}')
+                                                        left_text.font.color.rgb = RGBColor(210, 0, 210)
+                                                        left_paragraph.alignment = 2
+                                                        # strr += f"{}\n{} \n"
+                                                    except:
+                                                        pass
+                                                    zx += 1
+
+                                                open(f'ahmed2.txt', 'a', encoding='utf-8').write(strr)
+                                            except:
+                                                pass
                                     except:
                                         pass
                                     try:
@@ -1146,7 +1165,9 @@ def an(msg):
                                     except:
                                         pass
                                     document.save('Ahmed2.docx')
-                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
+                                    pptx_to_pdf(output_path='Ahmed2.pdf', input_path='Ahmed2.docx')
+
+                                    bot.send_document(ch, open(f'Ahmed2.pdf', 'rb'),
                                                       caption=f'{msg.document.file_name}\nترجمة سطرية')
 
                                     x1 = open(f'{user}ar.txt', 'r', encoding='utf-8').read()
@@ -1328,4 +1349,4 @@ while i == 0:
         i += 1
     except:
         pass
-    
+
