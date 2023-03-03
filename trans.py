@@ -75,8 +75,8 @@ import subprocess
 
 print('tran')
 r1 = requests.session()
-token = '1215240244:AAEPIpxylfNdqjgQ7vPnOh-JVshFF_FE4KU'
-bot = telebot.TeleBot("1215240244:AAEPIpxylfNdqjgQ7vPnOh-JVshFF_FE4KU")
+token = '1215240244:AAHXmj0_mJWW3NFGybWzersJKpgc9JY5aMQ'
+bot = telebot.TeleBot("1215240244:AAHXmj0_mJWW3NFGybWzersJKpgc9JY5aMQ")
 open('tran.txt', 'a').write('')
 c = []
 g = []
