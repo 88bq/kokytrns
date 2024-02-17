@@ -71,6 +71,7 @@ from pptx import Presentation
 from docx import Document
 import glob
 import subprocess
+
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 print('tran')
@@ -107,17 +108,17 @@ def key(msg):
         else:
             idd = msg.chat.id
             res = \
-                r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@akokybot&user_id={idd}').json()[
+                r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@reportmariem&user_id={idd}').json()[
                     'result'][
                     'status']
             if res == 'left' and msg.chat.id not in [idi, 1490464385]:
-                bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@akokybot')
+                bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@reportmariem')
             else:
                 q = types.InlineKeyboardMarkup()
                 q1 = types.InlineKeyboardButton('اضغط هنا \nاذا كان هنالك مصطلح طبي تريد ترجمته', callback_data='q1')
                 q.add(q1)
                 a9 = types.InlineKeyboardButton("المطور 💚", url="https://t.me/Q5QQQQ")
-                a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/akokybot")
+                a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/reportmariem")
                 q.add(a9)
                 q.add(a10)
                 bot.send_message(msg.chat.id, 'اهلا و سهلا بك في بالبوت الترجمة 💚', reply_markup=q)
@@ -135,7 +136,7 @@ def key(msg):
     try:
         q = types.InlineKeyboardMarkup()
         a9 = types.InlineKeyboardButton("المطور 💚", url="https://t.me/Q5QQQQ")
-        a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/akokybot")
+        a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/reportmariem")
         q.add(a9)
         q.add(a10)
         bot.send_message(ch, ' / البوت حاليا لا يترجم الصور الإعلانات ⬇,️', reply_markup=q)
@@ -429,11 +430,11 @@ def an(msg):
                 open('tran.txt', 'a').write(f'{msg.chat.id}\n')
             idd = msg.chat.id
             res = \
-                r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@akokybot&user_id={idd}').json()[
+                r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@reportmariem&user_id={idd}').json()[
                     'result'][
                     'status']
             if res == 'left' and msg.chat.id not in [idi, 1490464385]:
-                bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@akokybot')
+                bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@reportmariem')
             else:
                 try:
                     if msg.text == 'الاعضاء' and msg.chat.id in [idi, 1490464385]:
@@ -735,8 +736,8 @@ def an(msg):
                         pass
                     else:
                         open('tran.txt', 'a').write(f'{msg.chat.id}\n')
-                        bot.send_video(ch, 'BAACAgIAAxkBAAEBMbBgCBkFA1GYku_Q1wdBAAHTqU-ItsIAAhQMAAKHfEBIKhPv8pCI94oeBA')
-                        bot.send_voice(ch, 'AwACAgIAAxkBAAEBMX9gCBK56Cj7teHoOhauUWlr7poIZQACEAwAAod8QEiJYsq2h5MWXR4E')
+                        # bot.send_video(ch, 'BAACAgIAAxkBAAEBMbBgCBkFA1GYku_Q1wdBAAHTqU-ItsIAAhQMAAKHfEBIKhPv8pCI94oeBA')
+                        # bot.send_voice(ch, 'AwACAgIAAxkBAAEBMX9gCBK56Cj7teHoOhauUWlr7poIZQACEAwAAod8QEiJYsq2h5MWXR4E')
                     ch = msg.chat.id
                     user = msg.from_user.username
                     open(f'{user}.txt', 'w').write('Ahmed Koky (Q5QQQQ)\n\n')
@@ -920,15 +921,15 @@ def an(msg):
                     pass
                 else:
                     open('tran.txt', 'a').write(f'{msg.chat.id}\n')
-                    bot.send_video(ch, 'BAACAgIAAxkBAAEBMbBgCBkFA1GYku_Q1wdBAAHTqU-ItsIAAhQMAAKHfEBIKhPv8pCI94oeBA')
-                    bot.send_voice(ch, 'AwACAgIAAxkBAAEBMX9gCBK56Cj7teHoOhauUWlr7poIZQACEAwAAod8QEiJYsq2h5MWXR4E')
+                    # bot.send_video(ch, 'BAACAgIAAxkBAAEBMbBgCBkFA1GYku_Q1wdBAAHTqU-ItsIAAhQMAAKHfEBIKhPv8pCI94oeBA')
+                    # bot.send_voice(ch, 'AwACAgIAAxkBAAEBMX9gCBK56Cj7teHoOhauUWlr7poIZQACEAwAAod8QEiJYsq2h5MWXR4E')
                 idd = msg.chat.id
                 res = \
-                    r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@akokybot&user_id={idd}').json()[
+                    r1.get(f'https://api.telegram.org/bot{token}/getChatMember?chat_id=@reportmariem&user_id={idd}').json()[
                         'result'][
                         'status']
                 if res == 'left' and msg.chat.id not in [idi, 1490464385]:
-                    bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@akokybot')
+                    bot.send_message(ch, 'يجب عليك الاشتراك في القناة اول و من ثم استخدم البوت \nلطفا💚\n@reportmariem')
                 else:
                     ch = msg.chat.id
                     user = msg.from_user.username
@@ -939,19 +940,10 @@ def an(msg):
                         file_info = bot.get_file(msg.document.file_id)
                         downloaded_file = bot.download_file(file_info.file_path)
                         x = msg.document.file_name[-4:]
-                        if x == 'pptx' or x == 'PPTx':
-                            with open('ahmed.pptx', 'wb') as new_file:
-                                new_file.write(downloaded_file)
-                            pptx_to_pdf(output_path='ahmed.pdf', input_path='ahmed.pptx')
-                        elif x == 'docx' or x == 'DOCx':
-                            with open('ahmed.docx', 'wb') as new_file:
-                                new_file.write(downloaded_file)
-                            pptx_to_pdf(output_path='ahmed.pdf', input_path='ahmed.docx')
-                        else:
-                            with open('ahmed.pdf', 'wb') as new_file:
-                                new_file.write(downloaded_file)
-                            
-                        if 1 == 1:
+
+
+                        if x == '.pdf' or x == '.PDF':
+
 
                             if ch in h:
 
@@ -959,7 +951,9 @@ def an(msg):
                             else:
                                 h.append(ch)
                                 bot.send_message(ch, 'حسنا, سيتم التحميل الرجاء انتظار دقيقة واحدة 💚')
-                                
+                                with open('ahmed.pdf', 'wb') as new_file:
+                                    new_file.write(downloaded_file)
+
                                 v = 0
                                 document = Document()
                                 print('ok')
@@ -1037,9 +1031,8 @@ def an(msg):
                                     except:
                                         pass
                                     document.save('Ahmed2.docx')
-                                    pptx_to_pdf(output_path='Ahmed2.pdf', input_path='Ahmed2.docx')
 
-                                    bot.send_document(ch, open(f'Ahmed2.pdf', 'rb'),
+                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
                                                       caption=f'{msg.document.file_name}\nترجمة سطرية')
 
                                     x1 = open(f'{user}ar.txt', 'r', encoding='utf-8').read()
@@ -1068,19 +1061,7 @@ def an(msg):
                                     bot.send_document(ch, open(f'Ahmed1.docx', 'rb'),
                                                       caption=f'{msg.document.file_name}\nترجمة صفحة صفحة')
                                     cc = 0
-                                    u = open(f'ahmed2.txt', 'r', encoding='utf-8').read()
-                                    print(u)
 
-                                    document = Document()
-                                    paragraph = document.add_paragraph(str(u))
-                                    paragraph.style = document.styles.add_style('', WD_STYLE_TYPE.PARAGRAPH)
-                                    font = paragraph.style.font
-                                    font.size = Pt(16)
-                                    font.bold = True
-                                    font.color.rgb = RGBColor(0, 0, 0)
-                                    document.save('Ahmed2.docx')
-                                    bot.send_document(ch, open(f'Ahmed2.docx', 'rb'),
-                                                      caption=f'{msg.document.file_name}\nترجمة سطرية')
 
                         else:
                             if ch in h:
@@ -1197,7 +1178,7 @@ def an(msg):
                         pass
             q = types.InlineKeyboardMarkup()
             a9 = types.InlineKeyboardButton("المطور 💚", url="https://t.me/Q5QQQQ")
-            a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/akokybot")
+            a10 = types.InlineKeyboardButton("قناه الاعلانات↗️", url="https://t.me/reportmariem")
             q.add(a9)
             q.add(a10)
             try:
